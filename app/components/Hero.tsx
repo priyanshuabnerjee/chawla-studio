@@ -10,7 +10,7 @@ export default function Hero() {
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         disablePictureInPicture
         controlsList="nodownload noplaybackrate"
         className="absolute inset-0 h-full w-full object-cover pointer-events-none"
