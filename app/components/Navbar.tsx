@@ -1,112 +1,132 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const navLinks = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "Gallery", href: "#portfolio" },
+  { name: "Contact", href: "#contact" },
+];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 left-0 z-50 w-full bg-[#2B1B12]/80 backdrop-blur-md shadow-lg">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-
-        {/* Logo */}
-        <h1 className="text-xl font-bold tracking-[0.2em] text-white md:text-2xl">
-          CHAWLA STUDIO
-        </h1>
-
-        {/* Desktop Menu */}
-        <div className="hidden items-center gap-8 text-white md:flex">
-          <a href="#home" className="transition hover:text-[#D4AF37]">
-            Home
-          </a>
-
-          <a href="#about" className="transition hover:text-[#D4AF37]">
-            About
-          </a>
-
-          <a href="#services" className="transition hover:text-[#D4AF37]">
-            Services
-          </a>
-
-          <a href="#portfolio" className="transition hover:text-[#D4AF37]">
-            Gallery
-          </a>
-
-          <a href="#contact" className="transition hover:text-[#D4AF37]">
-            Contact
-          </a>
-
-          <a
-            href="#contact"
-            className="rounded-full bg-[#D4AF37] px-6 py-3 font-semibold text-black transition hover:scale-105"
-          >
-            Book Now
-          </a>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="text-3xl text-white md:hidden"
+    <>
+      <nav
+        className={`fixed left-1/2 top-5 z-50 -translate-x-1/2 transition-all duration-500 ${
+          scrolled
+            ? "w-[90%] max-w-5xl"
+            : "w-[92%] max-w-6xl"
+        }`}
+      >
+        <div
+          className="
+          flex items-center justify-between
+          rounded-full
+          border border-white/10
+          bg-black/35
+          backdrop-blur-2xl
+          px-6
+          py-3
+          shadow-[0_12px_40px_rgba(0,0,0,0.35)]
+          transition-all duration-500
+        "
         >
-          ☰
-        </button>
-      </div>
+          {/* Logo */}
 
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="border-t border-white/10 bg-[#2B1B12] md:hidden">
-          <a
-            href="#home"
-            onClick={() => setMenuOpen(false)}
-            className="block px-6 py-4 text-white hover:bg-[#3d281c]"
-          >
-            Home
+          <a href="#home" className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#D4AF37] text-xs font-semibold text-[#D4AF37]">
+              CS
+            </div>
+
+            <div className="leading-none">
+              <p className="font-[family-name:var(--font-cormorant)] text-lg tracking-[0.22em] text-white">
+                CHAWLA
+              </p>
+
+              <p className="mt-1 text-[9px] uppercase tracking-[0.45em] text-gray-300">
+                STUDIO
+              </p>
+            </div>
           </a>
 
-          <a
-            href="#about"
-            onClick={() => setMenuOpen(false)}
-            className="block px-6 py-4 text-white hover:bg-[#3d281c]"
-          >
-            About
-          </a>
+          {/* Desktop Navigation */}
 
-          <a
-            href="#services"
-            onClick={() => setMenuOpen(false)}
-            className="block px-6 py-4 text-white hover:bg-[#3d281c]"
-          >
-            Services
-          </a>
+          <div className="hidden items-center gap-8 md:flex">
+            {navLinks.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="group relative text-sm text-white transition duration-300 hover:text-[#D4AF37]"
+              >
+                {item.name}
 
-          <a
-            href="#portfolio"
-            onClick={() => setMenuOpen(false)}
-            className="block px-6 py-4 text-white hover:bg-[#3d281c]"
-          >
-            Gallery
-          </a>
+                <span className="absolute -bottom-2 left-0 h-[2px] w-0 bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
+              </a>
+            ))}
+          </div>
 
-          <a
-            href="#contact"
-            onClick={() => setMenuOpen(false)}
-            className="block px-6 py-4 text-white hover:bg-[#3d281c]"
-          >
-            Contact
-          </a>
+          {/* CTA */}
 
-          <div className="p-6">
+          <div className="hidden md:block">
             <a
               href="#contact"
-              onClick={() => setMenuOpen(false)}
-              className="block rounded-full bg-[#D4AF37] py-3 text-center font-semibold text-black transition hover:scale-105"
+              className="rounded-full bg-[#D4AF37] px-5 py-2.5 text-sm font-semibold text-black transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-[#E6BF52]"
             >
-              Book Now
+              Book Consultation
             </a>
           </div>
+
+          {/* Mobile Button */}
+
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-2xl text-white md:hidden"
+          >
+            ☰
+          </button>
         </div>
-      )}
-    </nav>
+
+        {/* Mobile Menu */}
+
+        {menuOpen && (
+          <div className="mt-3 overflow-hidden rounded-3xl border border-white/10 bg-black/80 backdrop-blur-xl md:hidden">
+            {navLinks.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className="block px-6 py-5 text-white transition hover:bg-white/10"
+              >
+                {item.name}
+              </a>
+            ))}
+
+            <div className="p-5">
+              <a
+                href="#contact"
+                className="block rounded-full bg-[#D4AF37] py-3 text-center font-semibold text-black"
+              >
+                Book Consultation
+              </a>
+            </div>
+          </div>
+        )}
+      </nav>
+    </>
   );
 }

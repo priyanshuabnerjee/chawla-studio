@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative h-screen min-h-[700px] w-full overflow-hidden"
+      className="relative mt-24 h-[calc(100vh-6rem)] min-h-[700px] w-full overflow-hidden rounded-t-[32px] bg-black"
     >
       {/* Background Video */}
       <video
@@ -10,19 +10,21 @@ export default function Hero() {
         muted
         loop
         playsInline
-        className="absolute inset-0 h-full w-full object-cover"
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noplaybackrate"
+        className="absolute inset-0 h-full w-full object-cover pointer-events-none"
       >
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
 
       {/* Premium Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-[#1A120D]/60 to-black/80"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/45 to-black/80"></div>
 
       {/* Hero Content */}
       <div className="relative z-10 flex h-full items-center justify-center px-6">
-        <div className="max-w-5xl text-center">
-
-          <p className="mb-5 text-xs font-medium uppercase tracking-[8px] text-[#D4AF37] sm:text-sm md:mb-6 md:text-base md:tracking-[10px]">
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="mb-5 text-[11px] font-medium uppercase tracking-[7px] text-[#D4AF37] sm:text-sm md:mb-6 md:text-base md:tracking-[10px]">
             CHAWLA STUDIO
           </p>
 
@@ -41,23 +43,20 @@ export default function Hero() {
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:mt-12 sm:flex-row">
-
             <a
               href="#contact"
-              className="w-full rounded-full bg-[#D4AF37] px-8 py-4 text-center font-semibold text-[#1A120D] transition duration-300 hover:scale-105 hover:bg-[#E8C766] sm:w-auto"
+              className="w-full rounded-full bg-[#D4AF37] px-8 py-4 text-center font-semibold text-[#1A120D] transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 hover:bg-[#E8C766] sm:w-auto"
             >
               Book Your Story
             </a>
 
             <a
               href="#portfolio"
-              className="w-full rounded-full border border-white px-8 py-4 text-center font-semibold text-white transition duration-300 hover:bg-white hover:text-[#1A120D] sm:w-auto"
+              className="w-full rounded-full border border-white px-8 py-4 text-center font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-[#1A120D] active:scale-95 sm:w-auto"
             >
               Explore Portfolio
             </a>
-
           </div>
-
         </div>
       </div>
 
