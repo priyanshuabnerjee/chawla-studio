@@ -40,7 +40,17 @@ export default function Footer() {
 
             <div className="space-y-3 text-gray-400">
               <p>📍 Jamshedpur, Jharkhand</p>
-              <p>📞 +91 98765 43210</p>
+
+              <p>
+                📞{" "}
+                <a
+                  href="tel:+918603195242"
+                  className="hover:text-white transition"
+                >
+                  +91 86031 95242
+                </a>
+              </p>
+
               <p>✉️ hello@chawlastudio.com</p>
             </div>
           </div>

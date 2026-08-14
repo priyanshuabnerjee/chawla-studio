@@ -21,32 +21,76 @@ export default function Contact() {
         </div>
 
         <div className="grid gap-10 md:grid-cols-2">
+
           {/* Contact Details */}
           <div className="space-y-8">
+
+            {/* Phone */}
             <div>
               <h3 className="mb-2 text-xl font-semibold text-[#D4AF37]">
                 Phone
               </h3>
-              <p>+91 98765 43210</p>
+
+              <a
+                href="tel:+918603195242"
+                className="transition hover:text-[#D4AF37]"
+              >
+                +91 86031 95242
+              </a>
             </div>
 
+            {/* Email */}
             <div>
               <h3 className="mb-2 text-xl font-semibold text-[#D4AF37]">
                 Email
               </h3>
+
               <p>hello@chawlastudio.com</p>
             </div>
 
+            {/* Location */}
             <div>
               <h3 className="mb-2 text-xl font-semibold text-[#D4AF37]">
                 Location
               </h3>
-              <p>Civil Lines, New Delhi, India</p>
+
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Reliance+Smart,+Sakchi,+Jamshedpur,+Jharkhand"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition hover:text-[#D4AF37]"
+              >
+                Reliance Smart, Sakchi, Jamshedpur, Jharkhand
+              </a>
             </div>
+
+            {/* Google Maps Preview */}
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Reliance+Smart,+Sakchi,+Jamshedpur,+Jharkhand"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block overflow-hidden rounded-xl border border-gray-700"
+            >
+              <iframe
+                title="Chawla Studio Location"
+                src="https://www.google.com/maps?q=Reliance%20Smart%2C%20Sakchi%2C%20Jamshedpur%2C%20Jharkhand&output=embed"
+                className="h-52 w-full pointer-events-none"
+                loading="lazy"
+              />
+
+              {/* Click overlay */}
+              <div className="absolute inset-0 flex items-end bg-transparent">
+                <div className="w-full bg-black/60 px-4 py-3 text-sm text-white opacity-0 transition group-hover:opacity-100">
+                  Open in Google Maps →
+                </div>
+              </div>
+            </a>
+
           </div>
 
           {/* Contact Form */}
           <form className="space-y-5">
+
             <input
               type="text"
               placeholder="Your Name"
@@ -66,10 +110,12 @@ export default function Contact() {
             />
 
             <button
+              type="submit"
               className="rounded-full bg-[#D4AF37] px-8 py-4 font-semibold text-black transition hover:scale-105"
             >
               Send Inquiry
             </button>
+
           </form>
         </div>
       </div>
