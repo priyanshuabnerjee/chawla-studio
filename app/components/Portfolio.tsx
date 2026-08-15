@@ -98,20 +98,6 @@ const portfolioItems = [
   },
 ];
 
-/* =====================================================
-   IMAGE PRELOADER
-===================================================== */
-
-const preloadImage = (src: string) => {
-  return new Promise<void>((resolve) => {
-    const img = new window.Image();
-
-    img.onload = () => resolve();
-    img.onerror = () => resolve();
-
-    img.src = src;
-  });
-};
 
 /* =====================================================
    COMPONENT
@@ -127,7 +113,6 @@ export default function Portfolio() {
 
   const [currentImage, setCurrentImage] = useState(0);
 
-  const [imageLoading, setImageLoading] = useState(false);
 
   /* =====================================================
      BODY SCROLL LOCK
@@ -177,30 +162,18 @@ export default function Portfolio() {
      OPEN STORY
   ===================================================== */
 
-  const openGallery = async (
-    title: string,
-    images: string[]
-  ) => {
-    setActiveStory({
-      title,
-      images,
-    });
+  const openGallery = (
+  title: string,
+  images: string[]
+) => {
+  setActiveStory({
+    title,
+    images,
+  });
 
-    setCurrentImage(0);
-    setImageLoading(false);
-    setGalleryOpen(true);
-
-    /*
-      Only preload the first two photos
-      of the selected story.
-    */
-
-    preloadImage(images[0]);
-
-    if (images[1]) {
-      preloadImage(images[1]);
-    }
-  };
+  setCurrentImage(0);
+  setGalleryOpen(true);
+};
 
   /* =====================================================
      CLOSE STORY
@@ -219,7 +192,7 @@ export default function Portfolio() {
      CHANGE IMAGE
   ===================================================== */
 
-  const changeImage = async (index: number) => {
+  const changeImage = (index: number) => {
     if (!activeStory) return;
 
     const total = activeStory.images.length;
@@ -227,28 +200,7 @@ export default function Portfolio() {
     const newIndex =
       (index + total) % total;
 
-    const image =
-      activeStory.images[newIndex];
-
-    setImageLoading(true);
-
-    await preloadImage(image);
-
     setCurrentImage(newIndex);
-
-    setImageLoading(false);
-
-    /*
-      Preload the next image quietly.
-      This makes the next click feel faster.
-    */
-
-    const nextIndex =
-      (newIndex + 1) % total;
-
-    preloadImage(
-      activeStory.images[nextIndex]
-    );
   };
 
   /* =====================================================
@@ -256,7 +208,7 @@ export default function Portfolio() {
   ===================================================== */
 
   const nextImage = () => {
-    if (!activeStory || imageLoading) return;
+    if (!activeStory) return;
 
     const next =
       currentImage + 1 >= activeStory.images.length
@@ -271,7 +223,7 @@ export default function Portfolio() {
   ===================================================== */
 
   const previousImage = () => {
-    if (!activeStory || imageLoading) return;
+    if (!activeStory) return;
 
     const previous =
       currentImage - 1 < 0
@@ -588,23 +540,6 @@ export default function Portfolio() {
             "
           >
 
-            {/* LOADING SPINNER */}
-
-            {imageLoading && (
-              <div
-                className="
-                  absolute
-                  z-20
-                  h-10
-                  w-10
-                  animate-spin
-                  rounded-full
-                  border-2
-                  border-white/20
-                  border-t-[#D4AF37]
-                "
-              />
-            )}
 
             {/* IMAGE */}
 
@@ -633,7 +568,6 @@ export default function Portfolio() {
             <button
               type="button"
               onClick={previousImage}
-              disabled={imageLoading}
               aria-label="Previous image"
               className="
                 absolute
@@ -658,7 +592,6 @@ export default function Portfolio() {
                 hover:border-[#D4AF37]
                 hover:bg-[#D4AF37]
                 hover:text-black
-                disabled:opacity-40
                 md:left-5
                 md:h-14
                 md:w-14
@@ -672,7 +605,6 @@ export default function Portfolio() {
             <button
               type="button"
               onClick={nextImage}
-              disabled={imageLoading}
               aria-label="Next image"
               className="
                 absolute
@@ -697,7 +629,6 @@ export default function Portfolio() {
                 hover:border-[#D4AF37]
                 hover:bg-[#D4AF37]
                 hover:text-black
-                disabled:opacity-40
                 md:right-5
                 md:h-14
                 md:w-14
@@ -747,8 +678,7 @@ export default function Portfolio() {
                 <button
                   key={index}
                   type="button"
-                  disabled={imageLoading}
-                  onClick={() =>
+                      onClick={() =>
                     changeImage(index)
                   }
                   aria-label={`Go to image ${
@@ -759,7 +689,6 @@ export default function Portfolio() {
                     rounded-full
                     transition-all
                     duration-500
-                    disabled:cursor-wait
                     ${
                       currentImage === index
                         ? "w-10 bg-[#D4AF37]"

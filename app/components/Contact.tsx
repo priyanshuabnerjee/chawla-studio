@@ -71,11 +71,10 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="group relative block overflow-hidden rounded-xl border border-gray-700"
             >
-              <iframe
-                title="Chawla Studio Location"
-                src="https://www.google.com/maps?q=Reliance%20Smart%2C%20Sakchi%2C%20Jamshedpur%2C%20Jharkhand&output=embed"
-                className="h-52 w-full pointer-events-none"
-                loading="lazy"
+              <img
+                src="/map-preview.png"
+                alt="Chawla Studio Location"
+                className="h-52 w-full object-cover transition duration-300 group-hover:scale-[1.02]"
               />
 
               {/* Click overlay */}

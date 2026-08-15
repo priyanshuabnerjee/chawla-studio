@@ -64,11 +64,6 @@ export default function Quote() {
             <span className="h-px w-8 bg-[#D4AF37]/40 sm:w-14" />
           </div>
 
-          {/* Quote Mark */}
-          <div className="mb-1 font-[family-name:var(--font-cormorant)] text-5xl leading-none text-[#D4AF37]/70 sm:text-6xl">
-            “
-          </div>
-
           {/* Quote */}
           <blockquote
             className="
