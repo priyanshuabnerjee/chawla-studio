@@ -2,7 +2,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="bg-[#0f0f0f] px-6 py-24 text-white"
+      className="bg-[#0f0f0f] px-6 pt-8 pb-24 text-white"
     >
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
@@ -31,12 +31,21 @@ export default function Contact() {
                 Phone
               </h3>
 
-              <a
-                href="tel:+918603195242"
-                className="transition hover:text-[#D4AF37]"
-              >
-                +91 86031 95242
-              </a>
+              <div className="space-y-2">
+                <a
+                  href="tel:+918603195242"
+                  className="block transition hover:text-[#D4AF37]"
+                >
+                  +91 86031 95242
+                </a>
+
+                <a
+                  href="tel:+919199427356"
+                  className="block transition hover:text-[#D4AF37]"
+                >
+                  +91 91994 27356
+                </a>
+              </div>
             </div>
 
             {/* Email */}
@@ -46,6 +55,75 @@ export default function Contact() {
               </h3>
 
               <p>hello@chawlastudio.com</p>
+            </div>
+
+            {/* Social Media */}
+            <div>
+              <h3 className="mb-3 text-xl font-semibold text-[#D4AF37]">
+                Follow Us
+              </h3>
+
+              <div className="flex gap-3">
+
+                {/* Instagram */}
+                <a
+                  href="https://www.instagram.com/chintuchawlaphotography/?hl=en"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="flex h-14 w-14 items-center justify-center rounded-full border border-gray-700 text-white transition hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-black"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    className="h-7 w-7"
+                  >
+                    <rect
+                      x="3"
+                      y="3"
+                      width="18"
+                      height="18"
+                      rx="5"
+                    />
+
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="4"
+                    />
+
+                    <circle
+                      cx="17.5"
+                      cy="6.5"
+                      r="1"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                  </svg>
+                </a>
+
+                {/* Facebook */}
+                <a
+                  href="https://www.facebook.com/newstudiochawla"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="flex h-14 w-14 items-center justify-center rounded-full border border-gray-700 text-white transition hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-black"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="h-7 w-7"
+                  >
+                    <path d="M14 8h3V4h-3c-2.8 0-5 2.2-5 5v3H6v4h3v8h4v-8h3.2l.8-4H13V9c0-.6.4-1 1-1Z" />
+                  </svg>
+                </a>
+
+              </div>
             </div>
 
             {/* Location */}
@@ -74,7 +152,7 @@ export default function Contact() {
               <img
                 src="/map-preview.png"
                 alt="Chawla Studio Location"
-                className="h-52 w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                className="h-52 w-full object-cover"
               />
 
               {/* Click overlay */}

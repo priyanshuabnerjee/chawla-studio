@@ -107,7 +107,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="overflow-hidden bg-white pt-0 pb-28">
+    <section className="relative z-10 -mt-px overflow-hidden bg-white pt-0 pb-8 sm:mt-0 sm:pb-28">
       <div className="mx-auto max-w-7xl px-6">
 
         {/* Heading */}
@@ -119,11 +119,13 @@ export default function Testimonials() {
           <h2 className="font-[family-name:var(--font-cormorant)] text-5xl text-[#1A120D] lg:text-6xl">
             Loved by Our Couples
           </h2>
-          <div className="mx-auto mt-6 flex items-center justify-center gap-4">
-  <span className="h-px w-20 bg-[#D4AF37]" />
-  <span className="h-2.5 w-2.5 rotate-45 bg-[#D4AF37]" />
-  <span className="h-px w-20 bg-[#D4AF37]" />
-</div>
+
+          {/* Divider - Hidden on Mobile */}
+          <div className="mx-auto mt-6 hidden items-center justify-center gap-4 sm:flex">
+            <span className="h-px w-20 bg-[#D4AF37]" />
+            <span className="h-2.5 w-2.5 rotate-45 bg-[#D4AF37]" />
+            <span className="h-px w-20 bg-[#D4AF37]" />
+          </div>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
             Every wedding is unique, and every smile we capture becomes a

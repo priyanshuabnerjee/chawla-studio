@@ -26,9 +26,15 @@ export default function Hero() {
         <div className="w-full max-w-5xl text-center">
 
           {/* Brand */}
-          <p className="mb-4 text-[10px] font-medium uppercase tracking-[6px] text-[#D4AF37] sm:text-xs sm:tracking-[8px] md:mb-5 md:text-sm md:tracking-[10px]">
-            CHINTU CHAWLA PHOTOGRAPHY
-          </p>
+          <div className="mb-4 sm:mb-5">
+            <p className="text-2xl font-extrabold uppercase tracking-[5px] text-[#D4AF37] drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] sm:text-3xl sm:tracking-[7px] md:text-4xl md:tracking-[9px]">
+              CHINTU CHAWLA PHOTOGRAPHY
+            </p>
+
+            <p className="mt-2 text-base font-extrabold uppercase tracking-[3px] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] sm:text-lg sm:tracking-[5px] md:text-xl md:tracking-[6px]">
+              A UNIT OF NEW CHAWLA STUDIO
+            </p>
+          </div>
 
           {/* Heading */}
           <h1 className="font-[family-name:var(--font-cormorant)] text-4xl font-semibold leading-[0.95] text-white sm:text-5xl md:text-7xl lg:text-8xl">
@@ -47,18 +53,18 @@ export default function Hero() {
           </p>
 
           {/* Buttons */}
-          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:mt-9 sm:flex-row sm:gap-4">
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 pb-3 sm:mt-9 sm:flex-row sm:gap-4 sm:pb-0">
 
             <a
               href="#contact"
-              className="w-full rounded-full bg-[#D4AF37] px-8 py-3.5 text-center font-semibold text-[#1A120D] transition duration-300 hover:scale-105 hover:bg-[#E8C766] sm:w-auto"
+              className="w-full max-w-[340px] rounded-full bg-[#D4AF37] px-8 py-3.5 text-center font-semibold text-[#1A120D] transition duration-300 hover:scale-105 hover:bg-[#E8C766] sm:w-auto sm:max-w-none"
             >
               Book Your Story
             </a>
 
             <a
               href="#portfolio"
-              className="w-full rounded-full border border-white/80 px-8 py-3.5 text-center font-semibold text-white transition duration-300 hover:bg-white hover:text-[#1A120D] sm:w-auto"
+              className="w-full max-w-[340px] rounded-full border border-white/80 px-8 py-3.5 text-center font-semibold text-white transition duration-300 hover:bg-white hover:text-[#1A120D] sm:w-auto sm:max-w-none"
             >
               Explore Portfolio
             </a>
@@ -67,14 +73,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll Indicator - Mobile Only */}
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 animate-bounce sm:hidden">
-        <a href="#about" aria-label="Scroll to About section">
-          <div className="flex h-10 w-6 justify-center rounded-full border border-white/70">
-            <div className="mt-2 h-2.5 w-1 rounded-full bg-white" />
-          </div>
-        </a>
-      </div>
     </section>
   );
 }

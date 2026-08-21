@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /* =====================================================
    STORY IMAGES
@@ -54,6 +54,80 @@ const engagementImages = [
   "/images/portfolio/engagement/engagement-4.jpg",
   "/images/portfolio/engagement/engagement-5.jpg",
 ];
+
+/* =====================================================
+   CINEMATIC VIDEO PREVIEW
+===================================================== */
+
+function CinematicPreview({ src }: { src: string }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "1200px 0px", threshold: 0.01 }
+    );
+
+    observer.observe(video);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!shouldLoad || !videoRef.current) return;
+
+    const video = videoRef.current;
+
+    video.load();
+
+    const playVideo = () => {
+      video.play().catch(() => {});
+    };
+
+    if (video.readyState >= 2) {
+      playVideo();
+    } else {
+      video.addEventListener("canplay", playVideo, { once: true });
+    }
+
+    return () => {
+      video.removeEventListener("canplay", playVideo);
+    };
+  }, [shouldLoad]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={shouldLoad ? src : undefined}
+      autoPlay={shouldLoad}
+      muted
+      loop
+      playsInline
+      preload={shouldLoad ? "auto" : "none"}
+      className="
+        pointer-events-none
+        absolute
+        inset-0
+        h-full
+        w-full
+        object-cover
+        transition-transform
+        duration-700
+        group-hover:scale-105
+      "
+    />
+  );
+}
 
 /* =====================================================
    PORTFOLIO CARDS
@@ -113,13 +187,16 @@ export default function Portfolio() {
 
   const [currentImage, setCurrentImage] = useState(0);
 
+  const [videoOpen, setVideoOpen] = useState(false);
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+
 
   /* =====================================================
      BODY SCROLL LOCK
   ===================================================== */
 
   useEffect(() => {
-    if (galleryOpen) {
+    if (galleryOpen || videoOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -128,7 +205,7 @@ export default function Portfolio() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [galleryOpen]);
+  }, [galleryOpen, videoOpen]);
 
   /* =====================================================
      KEYBOARD CONTROLS
@@ -186,6 +263,20 @@ export default function Portfolio() {
       setActiveStory(null);
       setCurrentImage(0);
     }, 200);
+  };
+
+  /* =====================================================
+     OPEN / CLOSE VIDEO
+  ===================================================== */
+
+  const openVideo = (video: string) => {
+    setActiveVideo(video);
+    setVideoOpen(true);
+  };
+
+  const closeVideo = () => {
+    setVideoOpen(false);
+    setActiveVideo(null);
   };
 
   /* =====================================================
@@ -432,6 +523,200 @@ export default function Portfolio() {
               </div>
 
             ))}
+
+          </div>
+
+          {/* =====================================================
+              CINEMATIC STORIES
+          ===================================================== */}
+
+          <div className="mt-28">
+
+            <div className="mb-12 text-center">
+              <p className="mb-3 uppercase tracking-[8px] text-[#D4AF37]">
+                CINEMATIC STORIES
+              </p>
+
+              <h3
+                className="
+                  font-[family-name:var(--font-cormorant)]
+                  text-4xl
+                  text-[#1A120D]
+                  sm:text-5xl
+                  lg:text-6xl
+                "
+              >
+                Moments Beyond The Frame
+              </h3>
+
+              <div className="mx-auto mt-6 flex items-center justify-center gap-4">
+                <span className="h-px w-16 bg-[#D4AF37]" />
+                <span className="h-2.5 w-2.5 rotate-45 bg-[#D4AF37]" />
+                <span className="h-px w-16 bg-[#D4AF37]" />
+              </div>
+
+              <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
+                Experience the emotions, movement, and moments beyond
+                photography.
+              </p>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-2">
+
+              {/* VIDEO 1 */}
+
+              <button
+                type="button"
+                onClick={() =>
+                  openVideo("/videos/cinematic-story-1.mp4")
+                }
+                className="
+                  group
+                  relative
+                  h-[280px]
+                  overflow-hidden
+                  rounded-3xl
+                  bg-[#120B08]
+                  shadow-xl
+                  text-left
+                  sm:h-[360px]
+                  lg:h-[420px]
+                "
+              >
+
+                <CinematicPreview src="/videos/cinematic-story-1.mp4" />
+
+                <div className="absolute inset-0 bg-black/35 transition-all duration-500 group-hover:bg-black/50" />
+
+                <div className="absolute inset-0 flex items-center justify-center">
+
+                  <span
+                    className="
+                      flex
+                      h-20
+                      w-20
+                      items-center
+                      justify-center
+                      rounded-full
+                      border
+                      border-white/70
+                      bg-black/40
+                      text-2xl
+                      text-white
+                      backdrop-blur-sm
+                      transition-all
+                      duration-300
+                      group-hover:scale-110
+                      group-hover:border-[#D4AF37]
+                      group-hover:bg-[#D4AF37]
+                      group-hover:text-black
+                    "
+                  >
+                    ▶
+                  </span>
+
+                </div>
+
+                <div className="absolute bottom-0 left-0 right-0 p-7">
+
+                  <p className="text-xs uppercase tracking-[5px] text-[#D4AF37]">
+                    CINEMATIC FILM
+                  </p>
+
+                  <h4
+                    className="
+                      mt-2
+                      font-[family-name:var(--font-cormorant)]
+                      text-3xl
+                      text-white
+                      sm:text-4xl
+                    "
+                  >
+                    A Story In Motion
+                  </h4>
+
+                </div>
+
+              </button>
+
+
+              {/* VIDEO 2 */}
+
+              <button
+                type="button"
+                onClick={() =>
+                  openVideo("/videos/cinematic-story-2.mp4")
+                }
+                className="
+                  group
+                  relative
+                  h-[280px]
+                  overflow-hidden
+                  rounded-3xl
+                  bg-[#120B08]
+                  shadow-xl
+                  text-left
+                  sm:h-[360px]
+                  lg:h-[420px]
+                "
+              >
+
+                <CinematicPreview src="/videos/cinematic-story-2.mp4" />
+
+                <div className="absolute inset-0 bg-black/35 transition-all duration-500 group-hover:bg-black/50" />
+
+                <div className="absolute inset-0 flex items-center justify-center">
+
+                  <span
+                    className="
+                      flex
+                      h-20
+                      w-20
+                      items-center
+                      justify-center
+                      rounded-full
+                      border
+                      border-white/70
+                      bg-black/40
+                      text-2xl
+                      text-white
+                      backdrop-blur-sm
+                      transition-all
+                      duration-300
+                      group-hover:scale-110
+                      group-hover:border-[#D4AF37]
+                      group-hover:bg-[#D4AF37]
+                      group-hover:text-black
+                    "
+                  >
+                    ▶
+                  </span>
+
+                </div>
+
+                <div className="absolute bottom-0 left-0 right-0 p-7">
+
+                  <p className="text-xs uppercase tracking-[5px] text-[#D4AF37]">
+                    CINEMATIC FILM
+                  </p>
+
+                  <h4
+                    className="
+                      mt-2
+                      font-[family-name:var(--font-cormorant)]
+                      text-3xl
+                      text-white
+                      sm:text-4xl
+                    "
+                  >
+                    Memories In Motion
+                  </h4>
+
+                </div>
+
+              </button>
+
+            </div>
 
           </div>
         </div>
@@ -704,6 +989,78 @@ export default function Portfolio() {
           </div>
 
         </div>
+      )}
+
+      {/* =====================================================
+          FULLSCREEN VIDEO
+      ===================================================== */}
+
+      {videoOpen && activeVideo && (
+
+        <div
+          className="
+            fixed
+            inset-0
+            z-[10000]
+            flex
+            items-center
+            justify-center
+            bg-black
+          "
+        >
+
+          {/* CLOSE */}
+
+          <button
+            type="button"
+            onClick={closeVideo}
+            aria-label="Close video"
+            className="
+              absolute
+              right-5
+              top-5
+              z-30
+              flex
+              h-12
+              w-12
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-white/30
+              bg-black/50
+              text-2xl
+              text-white
+              backdrop-blur-md
+              transition-all
+              duration-300
+              hover:border-[#D4AF37]
+              hover:bg-[#D4AF37]
+              hover:text-black
+            "
+          >
+            ×
+          </button>
+
+
+          {/* VIDEO */}
+
+          <video
+            src={activeVideo}
+            autoPlay
+            controls
+            playsInline
+            preload="auto"
+            className="
+              h-full
+              w-full
+              object-contain
+              bg-black
+            "
+          />
+
+        </div>
+
       )}
     </>
   );
