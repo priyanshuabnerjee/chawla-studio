@@ -51,7 +51,15 @@ export default function Footer() {
                 </a>
               </p>
 
-              <p>✉️ hello@chawlastudio.com</p>
+              <p>
+                ✉️{" "}
+                <a
+                  href="mailto:info@chintuchawlaphotography.in"
+                  className="hover:text-white transition"
+                >
+                  info@chintuchawlaphotography.in
+                </a>
+              </p>
             </div>
           </div>
 

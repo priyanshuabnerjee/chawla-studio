@@ -30,25 +30,13 @@ ${message}`;
 
     const encodedMessage = encodeURIComponent(enquiry);
 
-    // WhatsApp enquiry
+    // WhatsApp enquiry only
     const whatsappUrl = `https://wa.me/918603195242?text=${encodedMessage}`;
 
-    // Email enquiry
-    const subject = encodeURIComponent(
-      `New Photography Enquiry - ${name}`
-    );
-
-    const body = encodeURIComponent(enquiry);
-
-    const emailUrl =
-      `mailto:info@chintuchawlaphotography.in` +
-      `?subject=${subject}&body=${body}`;
-
-    // Open both destinations from the same user click.
+    // Open WhatsApp from the customer's click
     window.open(whatsappUrl, "_blank");
-    window.open(emailUrl, "_blank");
 
-    // Clear the form after opening the enquiry windows.
+    // Clear the form
     form.reset();
   };
 
@@ -206,10 +194,7 @@ ${message}`;
           </div>
 
           {/* Contact Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-5"
-          >
+          <form onSubmit={handleSubmit} className="space-y-5">
             <input
               type="text"
               name="name"
