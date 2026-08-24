@@ -30,56 +30,140 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed left-1/2 top-2 z-50 -translate-x-1/2 transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-        scrolled ? "w-[92%] max-w-4xl" : "w-[94%] max-w-6xl"
-      }`}
+      className={`
+        fixed
+        left-1/2
+        top-2
+        z-50
+        -translate-x-1/2
+        transition-all
+        duration-600
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+
+        ${
+          scrolled
+            ? "w-[92%] max-w-4xl"
+            : "w-[94%] max-w-6xl"
+        }
+      `}
     >
+      {/* MAIN NAVBAR */}
       <div
-        className={`flex items-center justify-between rounded-full border border-[#D4AF37]/20 bg-[#514940]/90 backdrop-blur-xl shadow-[0_16px_45px_rgba(0,0,0,0.28)] transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          scrolled ? "px-3 py-2 sm:px-4" : "px-4 py-2.5 sm:px-5 md:px-7"
-        }`}
+        className={`
+          flex
+          items-center
+          justify-between
+          rounded-full
+          border
+          border-[#D4AF37]/20
+          bg-[#514940]/90
+          backdrop-blur-xl
+          shadow-[0_16px_45px_rgba(0,0,0,0.28)]
+          transition-all
+          duration-600
+          ease-[cubic-bezier(0.22,1,0.36,1)]
+
+          ${
+            scrolled
+              ? "px-3 py-2 sm:px-4"
+              : "px-4 py-2.5 sm:px-5 md:px-7"
+          }
+        `}
       >
         {/* BRAND */}
         <a
           href="#home"
-          className={`flex min-w-0 shrink items-center transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-            scrolled ? "gap-2" : "gap-2.5"
-          }`}
+          onClick={() => setMenuOpen(false)}
+          className={`
+            flex
+            min-w-0
+            shrink
+            items-center
+            transition-all
+            duration-600
+            ease-[cubic-bezier(0.22,1,0.36,1)]
+
+            ${
+              scrolled
+                ? "gap-2"
+                : "gap-2.5"
+            }
+          `}
           aria-label="Chintu Chawla Photography"
         >
           {/* LOGO */}
           <img
             src="/chintu-chawla-logo-mark.png"
             alt="Chintu Chawla Photography"
-            className={`shrink-0 object-contain transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-              scrolled
-                ? "h-9 w-[65px] sm:h-11 sm:w-[88px]"
-                : "h-10 w-[70px] sm:h-14 sm:w-[110px]"
-            }`}
+            className={`
+              shrink-0
+              object-contain
+              transition-all
+              duration-600
+              ease-[cubic-bezier(0.22,1,0.36,1)]
+
+              ${
+                scrolled
+                  ? "h-9 w-[65px] sm:h-11 sm:w-[88px]"
+                  : "h-10 w-[70px] sm:h-14 sm:w-[110px]"
+              }
+            `}
           />
 
           {/* BRAND TEXT */}
           <div
-            className={`min-w-0 leading-none transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-              scrolled ? "translate-x-[-1px]" : "translate-x-0"
-            }`}
+            className={`
+              min-w-0
+              leading-none
+              transition-all
+              duration-600
+              ease-[cubic-bezier(0.22,1,0.36,1)]
+
+              ${
+                scrolled
+                  ? "translate-x-[-1px]"
+                  : "translate-x-0"
+              }
+            `}
           >
             <p
-              className={`font-[family-name:var(--font-cormorant)] tracking-[0.08em] text-[#D4AF37] transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                scrolled
-                  ? "text-[12px] sm:text-[16px]"
-                  : "text-[13px] sm:text-[18px] md:text-[20px]"
-              }`}
+              className={`
+                whitespace-nowrap
+                font-[family-name:var(--font-cormorant)]
+                tracking-[0.08em]
+                text-[#D4AF37]
+                transition-all
+                duration-600
+                ease-[cubic-bezier(0.22,1,0.36,1)]
+
+                ${
+                  scrolled
+                    ? "text-[12px] sm:text-[16px]"
+                    : "text-[13px] sm:text-[18px] md:text-[20px]"
+                }
+              `}
             >
               CHINTU CHAWLA
             </p>
 
             <p
-              className={`mt-1 font-bold uppercase tracking-[0.25em] text-[#D4AF37] transition-all duration-600 ${
-                scrolled
-                  ? "text-[6px] sm:text-[8px]"
-                  : "text-[6px] sm:text-[8px]"
-              }`}
+              className={`
+                mt-1
+                whitespace-nowrap
+                font-bold
+                uppercase
+                tracking-[0.25em]
+                text-[#D4AF37]
+                transition-all
+                duration-600
+                ease-[cubic-bezier(0.22,1,0.36,1)]
+
+                ${
+                  scrolled
+                    ? "text-[6px] sm:text-[8px]"
+                    : "text-[6px] sm:text-[8px]"
+                }
+              `}
             >
               PHOTOGRAPHY
             </p>
@@ -88,9 +172,20 @@ export default function Navbar() {
 
         {/* DESKTOP NAV */}
         <div
-          className={`hidden items-center md:flex transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-            scrolled ? "gap-5" : "gap-7"
-          }`}
+          className={`
+            hidden
+            items-center
+            transition-all
+            duration-600
+            ease-[cubic-bezier(0.22,1,0.36,1)]
+            md:flex
+
+            ${
+              scrolled
+                ? "gap-5"
+                : "gap-7"
+            }
+          `}
         >
           {navLinks.map((item) => (
             <a
@@ -127,30 +222,44 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* DESKTOP CTA */}
         <div className="hidden md:block">
           <a
             href="#contact"
-            className={`inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[#D4AF37] font-semibold text-[#17100C] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105 hover:bg-[#E6BF52] ${
-              scrolled
-                ? "px-4 py-2 text-xs"
-                : "px-5 py-2.5 text-sm"
-            }`}
+            className={`
+              inline-flex
+              items-center
+              justify-center
+              whitespace-nowrap
+              rounded-full
+              bg-[#D4AF37]
+              font-semibold
+              text-[#17100C]
+              transition-all
+              duration-500
+              ease-[cubic-bezier(0.22,1,0.36,1)]
+              hover:scale-105
+              hover:bg-[#E6BF52]
+
+              ${
+                scrolled
+                  ? "px-4 py-2 text-xs"
+                  : "px-5 py-2.5 text-sm"
+              }
+            `}
           >
             Book Consultation
           </a>
         </div>
 
-        {/* MOBILE BUTTON */}
+        {/* MOBILE MENU BUTTON */}
         <button
           type="button"
           onClick={() => setMenuOpen((prev) => !prev)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
-          className="
+          className={`
             flex
-            h-9
-            w-9
             shrink-0
             items-center
             justify-center
@@ -158,24 +267,44 @@ export default function Navbar() {
             border
             border-white/15
             bg-white/5
-            text-xl
             text-white
             transition-all
-            duration-300
+            duration-600
+            ease-[cubic-bezier(0.22,1,0.36,1)]
             hover:border-[#D4AF37]/50
             hover:text-[#D4AF37]
+
+            ${
+              scrolled
+                ? "h-9 w-9 text-lg"
+                : "h-10 w-10 text-xl"
+            }
+
             md:hidden
-          "
+          `}
         >
           {menuOpen ? "×" : "☰"}
         </button>
       </div>
 
       {/* MOBILE MENU */}
-      {menuOpen && (
+      <div
+        className={`
+          overflow-hidden
+          transition-all
+          duration-600
+          ease-[cubic-bezier(0.22,1,0.36,1)]
+          md:hidden
+
+          ${
+            menuOpen
+              ? "mt-3 max-h-[500px] opacity-100"
+              : "mt-0 max-h-0 opacity-0 pointer-events-none"
+          }
+        `}
+      >
         <div
           className="
-            mt-3
             overflow-hidden
             rounded-3xl
             border
@@ -183,7 +312,6 @@ export default function Navbar() {
             bg-[#514940]/95
             shadow-[0_20px_60px_rgba(0,0,0,0.4)]
             backdrop-blur-xl
-            md:hidden
           "
         >
           {navLinks.map((item) => (
@@ -223,13 +351,16 @@ export default function Navbar() {
                 text-sm
                 font-semibold
                 text-[#17100C]
+                transition-all
+                duration-300
+                hover:bg-[#E6BF52]
               "
             >
               Book Consultation
             </a>
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

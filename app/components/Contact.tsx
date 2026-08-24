@@ -1,4 +1,57 @@
+"use client";
+
+import { FormEvent } from "react";
+
 export default function Contact() {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+
+    const name = (
+      form.elements.namedItem("name") as HTMLInputElement
+    ).value.trim();
+
+    const email = (
+      form.elements.namedItem("email") as HTMLInputElement
+    ).value.trim();
+
+    const message = (
+      form.elements.namedItem("message") as HTMLTextAreaElement
+    ).value.trim();
+
+    const enquiry = `New Photography Enquiry
+
+Name: ${name}
+Email: ${email}
+
+Event Details:
+${message}`;
+
+    const encodedMessage = encodeURIComponent(enquiry);
+
+    // WhatsApp enquiry
+    const whatsappUrl = `https://wa.me/918603195242?text=${encodedMessage}`;
+
+    // Email enquiry
+    const subject = encodeURIComponent(
+      `New Photography Enquiry - ${name}`
+    );
+
+    const body = encodeURIComponent(enquiry);
+
+    const emailUrl =
+      `mailto:info@chintuchawlaphotography.in` +
+      `?subject=${subject}&body=${body}`;
+
+    // Open both destinations from the same user click.
+    window.open(whatsappUrl, "_blank");
+    window.open(emailUrl, "_blank");
+
+    // Clear the form after opening the enquiry windows.
+    form.reset();
+  };
+
   return (
     <section
       id="contact"
@@ -21,10 +74,8 @@ export default function Contact() {
         </div>
 
         <div className="grid gap-10 md:grid-cols-2">
-
           {/* Contact Details */}
           <div className="space-y-8">
-
             {/* Phone */}
             <div>
               <h3 className="mb-2 text-xl font-semibold text-[#D4AF37]">
@@ -54,7 +105,12 @@ export default function Contact() {
                 Email
               </h3>
 
-              <p>hello@chawlastudio.com</p>
+              <a
+                href="mailto:info@chintuchawlaphotography.in"
+                className="transition hover:text-[#D4AF37]"
+              >
+                info@chintuchawlaphotography.in
+              </a>
             </div>
 
             {/* Social Media */}
@@ -64,7 +120,6 @@ export default function Contact() {
               </h3>
 
               <div className="flex gap-3">
-
                 {/* Instagram */}
                 <a
                   href="https://www.instagram.com/chintuchawlaphotography/?hl=en"
@@ -81,20 +136,8 @@ export default function Contact() {
                     strokeWidth="1.8"
                     className="h-7 w-7"
                   >
-                    <rect
-                      x="3"
-                      y="3"
-                      width="18"
-                      height="18"
-                      rx="5"
-                    />
-
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="4"
-                    />
-
+                    <rect x="3" y="3" width="18" height="18" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
                     <circle
                       cx="17.5"
                       cy="6.5"
@@ -122,7 +165,6 @@ export default function Contact() {
                     <path d="M14 8h3V4h-3c-2.8 0-5 2.2-5 5v3H6v4h3v8h4v-8h3.2l.8-4H13V9c0-.6.4-1 1-1Z" />
                   </svg>
                 </a>
-
               </div>
             </div>
 
@@ -155,32 +197,38 @@ export default function Contact() {
                 className="h-52 w-full object-cover"
               />
 
-              {/* Click overlay */}
               <div className="absolute inset-0 flex items-end bg-transparent">
                 <div className="w-full bg-black/60 px-4 py-3 text-sm text-white opacity-0 transition group-hover:opacity-100">
                   Open in Google Maps →
                 </div>
               </div>
             </a>
-
           </div>
 
           {/* Contact Form */}
-          <form className="space-y-5">
-
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-5"
+          >
             <input
               type="text"
+              name="name"
+              required
               placeholder="Your Name"
               className="w-full rounded-lg border border-gray-700 bg-[#1b1b1b] p-4 outline-none focus:border-[#D4AF37]"
             />
 
             <input
               type="email"
+              name="email"
+              required
               placeholder="Email Address"
               className="w-full rounded-lg border border-gray-700 bg-[#1b1b1b] p-4 outline-none focus:border-[#D4AF37]"
             />
 
             <textarea
+              name="message"
+              required
               rows={5}
               placeholder="Tell us about your event..."
               className="w-full rounded-lg border border-gray-700 bg-[#1b1b1b] p-4 outline-none focus:border-[#D4AF37]"
@@ -192,7 +240,6 @@ export default function Contact() {
             >
               Send Inquiry
             </button>
-
           </form>
         </div>
       </div>
