@@ -19,50 +19,48 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://chawlastudio.com"),
+  metadataBase: new URL("https://www.chintuchawlaphotography.in"),
 
   title: {
-    default: "Chawla Studio | Luxury Wedding Photography & Cinematic Films",
-    template: "%s | Chawla Studio",
+    default: "Chintu Chawla Photography | Wedding Photographer in Jamshedpur",
+    template: "%s | Chintu Chawla Photography",
   },
 
   description:
-    "Chawla Studio captures timeless weddings, pre-wedding shoots, cinematic films, engagements, and unforgettable celebrations with elegance and creativity.",
+    "Chintu Chawla Photography is a wedding photography studio in Jamshedpur offering wedding photography, pre-wedding shoots, cinematic wedding films, maternity shoots, model shoots, baby shoots and premium albums.",
 
   keywords: [
-    "Chawla Studio",
-    "Wedding Photography",
-    "Wedding Photographer",
-    "Pre Wedding Shoot",
-    "Wedding Cinematography",
-    "Wedding Films",
-    "Luxury Wedding Photography",
-    "Indian Wedding Photographer",
-    "Wedding Studio",
-    "Photography Studio",
+    "Chintu Chawla Photography",
+    "Wedding Photographer in Jamshedpur",
+    "Wedding Photography in Jamshedpur",
+    "Pre Wedding Photographer in Jamshedpur",
+    "Pre Wedding Shoot in Jamshedpur",
+    "Wedding Cinematography in Jamshedpur",
+    "Wedding Films in Jamshedpur",
+    "Photography Studio in Jamshedpur",
   ],
 
-  authors: [{ name: "Chawla Studio" }],
+  authors: [{ name: "Chintu Chawla Photography" }],
 
-  creator: "Chawla Studio",
+  creator: "Chintu Chawla Photography",
 
-  publisher: "Chawla Studio",
+  publisher: "Chintu Chawla Photography",
 
   openGraph: {
-    title: "Chawla Studio",
+    title: "Chintu Chawla Photography | Wedding Photographer in Jamshedpur",
     description:
-      "Luxury wedding photography and cinematic storytelling crafted with elegance.",
-    url: "https://chawlastudio.com",
-    siteName: "Chawla Studio",
+      "Wedding photography, pre-wedding shoots and cinematic wedding films in Jamshedpur.",
+    url: "https://www.chintuchawlaphotography.in",
+    siteName: "Chintu Chawla Photography",
     locale: "en_IN",
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Chawla Studio",
+    title: "Chintu Chawla Photography | Wedding Photographer in Jamshedpur",
     description:
-      "Luxury Wedding Photography & Cinematic Films.",
+      "Wedding photography, pre-wedding shoots and cinematic wedding films in Jamshedpur.",
   },
 
   robots: {
@@ -74,7 +72,6 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -85,9 +82,36 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-white text-black">
-        {children}
-      </body>
+ <body className="min-h-full bg-white text-black">
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        name: "Chintu Chawla Photography",
+        url: "https://www.chintuchawlaphotography.in/",
+        telephone: "+91-86031-95242",
+        email: "info@chintuchawlaphotography.in",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress:
+            "1st Floor, near Bangal Club, SNP Area, Ambagan, Sakchi",
+          addressLocality: "Jamshedpur",
+          addressRegion: "Jharkhand",
+          postalCode: "831001",
+          addressCountry: "IN",
+        },
+        areaServed: {
+          "@type": "City",
+          name: "Jamshedpur",
+        },
+      }),
+    }}
+  />
+
+  {children}
+</body>
     </html>
   );
 }

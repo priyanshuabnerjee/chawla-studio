@@ -397,7 +397,11 @@ export default function Portfolio() {
 
                 <Image
   src={item.image}
-  alt={item.title}
+  alt={
+  index === 0
+    ? "Wedding photography in Jamshedpur by Chintu Chawla Photography"
+    : item.title
+}
   width={700}
   height={900}
   priority={index === 0}
